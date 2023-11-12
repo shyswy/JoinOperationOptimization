@@ -79,8 +79,6 @@ int main() {
 		cout << "output file opening fail.\n";
 	}
 
-	/*********************************************************************/
-
 	temp0 = name_grade();
 	temp1 = name_grade();
 	temp2 = name_number();
@@ -88,11 +86,7 @@ int main() {
 	int in_cnt=0;
 	int inin_cnt=0;
 	for (int i = 0; i < 1000; i++) {
-		
-			
-			// cout<<"outer block change!"<<endl; 
 			string line;
-			
 			string f = "./name_grade1/";
 			string b = ".csv";
 			string ss;
@@ -103,14 +97,9 @@ int main() {
 			while (!block[0].eof()) {
 				getline(block[0], buffer[0]);
 				if (block[0].eof()) continue;
-		//		cout<<"outer: "<<buffer[0]<<endl;
 				out_cnt++;
 				temp0.set_grade(buffer[0]);
-
-
 				for (int j = 0; j < 1000; j++) {
-
-
 					string ff = "./name_grade2/";
 					string bb = ".csv";
 					string ssss;
@@ -124,13 +113,11 @@ int main() {
 						while (!block[1].eof()) {
 							getline(block[1], buffer[0]);
 							if (block[1].eof()) continue;
-						//	cout<<"inner: "<<buffer[0]<<endl;
 							in_cnt++;
 							temp1.set_grade(buffer[0]);
 
 							if (temp0.student_name.compare(temp1.student_name) == 0) {//nat join two tuple
 								int cnt = 0;
-							//	cout<<"find: "<<temp0.student_name<<" "<<temp1.student_name<<endl;
 								if (temp0.korean > temp1.korean) cnt++;
 								if (temp0.math > temp1.math) cnt++;
 								if (temp0.english > temp1.english) cnt++;
@@ -156,13 +143,6 @@ int main() {
 												if (temp2.student_name.compare(temp1.student_name) == 0) {
 													string improve = make_tuple(temp2.student_name, temp2.student_number);//add to join table and continue
 													output << improve;
-												//	cout<<"get: "<<i<<" "<<j<<" "<<k<<endl;
-                                                // cout<<"buf: "<<buffer[0]<<endl;
-                                                // cout<< "0: "<<temp0.student_name<<temp0.korean<<" "<<temp0.math<<" "<<temp0.english<<" "<<temp0.science<<" "<<temp0.social<<" "<<temp0.history<<endl;
-                                                // cout<< "1: "<<temp1.student_name<<temp1.korean<<" "<<temp1.math<<" "<<temp1.english<<" "<<temp1.science<<" "<<temp1.social<<" "<<temp1.history <<endl;
-                                                // cout<<endl;
-                                                // inin_cnt++;
-
 												}
 											}
 										}
@@ -170,14 +150,8 @@ int main() {
 									}
 
 								}
-
-
 							}
-
-
 						}
-
-
 					}
 					block[1].close();
 				}
@@ -185,29 +159,6 @@ int main() {
 		block[0].close();
 }
 
-
-
-
-
-
-
-	// write codes here.
-
-
-
-
-
-
-
-
-//	cout<<"out_cnt:  "<<out_cnt<<" in_cnt: "<<in_cnt<<" inin_cnt: "<<inin_cnt<<endl;
-
-
-
-	/*********************************************************************/
-
-
 	output.close();
-
 	
 }

@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 #include <iostream>
 #include <fstream> 
 #include <vector>
@@ -64,17 +63,12 @@ int main(){
 		cout << "output file opening fail.\n";
 	}
 
-
 	int  br=0,bs=0;
-
 	int pr=0,ps=0;
-
 	int i=0;
 	temp0=name_age();
 	temp1=name_salary();
 	
-//	name_salary ns=name_salary();
-//	name_age na=name_age();
 	block[1].open("./name_salary/0.csv");
 	getline(block[1],buffer[1]);
 	temp1.set_name_salary(buffer[1]);
@@ -87,7 +81,6 @@ while(br!=1000&&bs!=1000){// ~10th block
 	
 		if(chk==1){//if need to open new, next block
 			block[i].close();
- 	 // cout<<"outer block change!"<<endl; 
       string line;
       char num='0';
       string f="./name_age/";
@@ -103,23 +96,17 @@ while(br!=1000&&bs!=1000){// ~10th block
 	
 	
 	if( block[i].is_open() ){
-		
 		if(!block[i].eof()) {		
 		getline(block[i],buffer[0]);
-//		cout<<"outer: "<<buffer[0]<<endl;
 		temp0.set_name_age(buffer[0]);
-		//cout<<na.name<<" "<<na.age<<endl;
 		 if(block[i].eof()){ //if next tuple does not exist, previously move to  next block
               br++;
-//			  cout<<"outer block end, go to next!"<<endl;
               chk=1;
 			 	continue; 
  
          }
-		 //cout<<"na: "<<na.name<<"ns: "<<ns.name<<endl;
 		  if(temp0.name.compare(temp1.name)==0){//nat join two tuple
                     string test2 =make_tuple(temp0.name,temp0.age,temp1.salary);//add to join table and continue
-          		//	cout<<"find1: " <<test2;
 					output<<test2;
 					cnt++;
 		  }
@@ -135,15 +122,10 @@ while(br!=1000&&bs!=1000){// ~10th block
 		}
 		else{
 			 br++;
-  //             cout<<"outer block end, go to next!"<<endl;
-              chk=1;
+             chk=1;
 
 		}
 	}
-		
-//		cout<<buffer[0]<<endl;
-		
-			
 
 	}
 
@@ -166,35 +148,24 @@ while(br!=1000&&bs!=1000){// ~10th block
       	if( block[j].is_open() ){
         	  if(!block[j].eof()){
             	  getline(block[j],buffer[1]);
-				  
-//				  cout<<"inner: "<<buffer[1]<<endl;
-				  if(block[j].eof()){//if next tuple does not exist,
-//					   cout<<"eof: "<<buffer[1]<<endl;
+				  if(block[j].eof()){//if next tuple does not exist,;
                          bs++; //if one block done, next block!
 						 chk2=1;
 						 continue;
-                        // ps=0;//reset!
                     }
 
   
           		 temp1.set_name_salary(buffer[1]);
-  	//			cout<<"na: "<<na.name<<" ns: "<<ns.name<<endl;
 				  if(temp0.name.compare(temp1.name)==0){//nat join two tuple
                   	string test1=make_tuple(temp0.name,temp0.age,temp1.salary);//add to join table and continue
-				//	cout<<"find2: "<<test1;
 					output<<test1;
 					cnt++;
 			      }
 				  else if( temp0.name.compare(temp1.name)==-1){ 
-					 // cout<<"swip"<<endl;
-
 					  done=true;
-					//  break;
-					
 				  }
 				  else{
 						done=true;
-					//	break;
 				  }
 
  
@@ -202,53 +173,15 @@ while(br!=1000&&bs!=1000){// ~10th block
 			  else{
 					bs++;
 					chk2=1;
-
 			  }
   
       }
-
-
 			
 	}//find unequal s tuple or done s tuple
 
-
 }
-
-
-		block[0].close();
-      	block[1].close();
-
-
-
-	/*********************************************************************************/
-	
-
-
-	//output.write(block,11); 
-
-
-
-
-
-
-
-	// write codes here.
-
-
-
-
-
-
-
-
-
-
-
-
-	/*********************************************************************************/
-
-
+	block[0].close();
+    block[1].close();
 	output.close();
-
 
 }
